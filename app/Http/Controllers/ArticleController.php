@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -14,6 +16,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // $articles = Cache::rememberForever('article', function () {
+        //     return DB::table('articles')->get();
+        // });
         $articles = Article::paginate(6);
         return view('articles.article', ['articles' => $articles]);
     }
